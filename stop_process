@@ -1,0 +1,15 @@
+BINNAME=hello
+
+process_path=/
+
+stop_process()
+{
+    for pid in 'ps -e|grep $BINNAME|awk '{print $1}''
+    do
+        if [ -d "/proc/${pid}/cwd" ]; then
+            if [ "$cwd" == "$process_path" ]; then
+                kill -9 $pid
+            fi
+        fi
+    done
+}
